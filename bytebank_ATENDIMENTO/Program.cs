@@ -1,4 +1,5 @@
 ﻿using bytebank.Modelos.Conta;
+using bytebank_ATENDIMENTO.bytebank.Util;
 
 Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
 
@@ -56,10 +57,20 @@ double MediaDaAmostra(double[] amostra)
 
 void TestaArrayDeContasCorrentes()
 {
-    ContaCorrente[] listaDeContas = new ContaCorrente[]
-    {
-        new ContaCorrente(874, "5679787-A"),
-        new ContaCorrente(874, "4456668-B"),
-        new ContaCorrente(874, "7781438-C")
-    }
+    ListaDeContasCorrentes listaDeContas = new ListaDeContasCorrentes();
+
+    listaDeContas.Adicionar(new ContaCorrente(874, "5679787-A"));
+    listaDeContas.Adicionar(new ContaCorrente(874, "4456668-B"));
+    listaDeContas.Adicionar(new ContaCorrente(874, "7781438-C"));
+    listaDeContas.Adicionar(new ContaCorrente(874, "3214532-D"));
+    listaDeContas.Adicionar(new ContaCorrente(874, "7614532-E"));
+    var clienteConta = new ContaCorrente(725, "8752345-F");
+    listaDeContas.Adicionar(clienteConta);
+    listaDeContas.ExibirLista();
+    listaDeContas.Remover(clienteConta);
+    listaDeContas.ExibirLista();
+
+    ContaCorrente maiorConta = listaDeContas.RetornaContaMaiorSaldo();
 }
+
+TestaArrayDeContasCorrentes();
