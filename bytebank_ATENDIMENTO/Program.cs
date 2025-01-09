@@ -121,5 +121,27 @@ void AtendimentoCliente()
 
 void CadastrarConta()
 {
-    throw new NotImplementedException();
+    Console.Clear();
+    Console.WriteLine("\t==================================================");
+    Console.WriteLine("\t===                                            ===");
+    Console.WriteLine("\t===           Cadastro de Contas               ===");
+    Console.WriteLine("\t===                                            ===");
+    Console.WriteLine("\t==================================================");
+    Console.WriteLine("\n");
+    Console.WriteLine("\t Informe Dados da Conta:");
+    Console.WriteLine("\n");
+    Console.Write("Número da conta: ");
+    string numeroConta = Console.ReadLine();
+
+    Console.Write("Número da agência: ");
+    int numeroDaAgencia = int.Parse(Console.ReadLine());
+
+    ContaCorrente conta = new ContaCorrente(numeroDaAgencia, numeroConta);
+
+    Console.Write("Informe o Saldo Inicial: ");
+    conta.Saldo = double.Parse(Console.ReadLine());
+
+    Console.Write("Informe o nome do titular: ");
+    conta.Titular.Nome = Console.ReadLine();
+
 }
