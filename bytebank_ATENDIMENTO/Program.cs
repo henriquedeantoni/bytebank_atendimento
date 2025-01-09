@@ -1,8 +1,10 @@
 ﻿using bytebank.Modelos.Conta;
 using bytebank_ATENDIMENTO.bytebank.Util;
+using System.Collections;
 
 Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
 
+#region Exemplos Arrays em C#
 Array amostra = Array.CreateInstance(typeof(double), 5);
 
 amostra.SetValue(6.9, 0);
@@ -71,6 +73,53 @@ void TestaArrayDeContasCorrentes()
     listaDeContas.ExibirLista();
 
     ContaCorrente maiorConta = listaDeContas.RetornaContaMaiorSaldo();
+
+    for(int i = 0; i<listaDeContas.Tamanho; i++)
+    {
+        ContaCorrente conta = listaDeContas[i];
+        Console.WriteLine($"Indice [{i}] = {conta.Conta}/{conta.Numero_agencia}");
+    }
 }
 
 TestaArrayDeContasCorrentes();
+
+#endregion
+
+
+ArrayList _listaDeContas = new ArrayList();
+void AtendimentoCliente()
+{ 
+    char opcao = '0';
+    while(opcao != '6')
+    {
+        Console.Clear();
+        Console.WriteLine("\t==================================================");
+        Console.WriteLine("\t===                                            ===");
+        Console.WriteLine("\t===          Atendimento ByteBank              ===");
+        Console.WriteLine("\t===                                            ===");
+        Console.WriteLine("\t===          1 - Cadastrar Conta               ===");
+        Console.WriteLine("\t===          2 - Listar Contas                 ===");
+        Console.WriteLine("\t===          3 - Remover Conta                 ===");
+        Console.WriteLine("\t===          4 - Ordenar Contas                ===");
+        Console.WriteLine("\t===          5 - Pesquisar Conta               ===");
+        Console.WriteLine("\t===          6 - Sair do Sistema               ===");
+        Console.WriteLine("\t===                                            ===");
+        Console.WriteLine("\t==================================================");
+        Console.WriteLine("\n\n");
+        Console.Write("\nDigite a opção desejada: ");
+
+        switch (opcao)
+        {
+            case '1': CadastrarConta();
+                break;
+            default: Console.WriteLine("\n\tOpção não encontrada...");
+                break;
+        }
+
+    }
+}
+
+void CadastrarConta()
+{
+    throw new NotImplementedException();
+}
