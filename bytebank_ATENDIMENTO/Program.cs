@@ -144,4 +144,8 @@ void CadastrarConta()
     Console.Write("Informe o nome do titular: ");
     conta.Titular.Nome = Console.ReadLine();
 
+    Console.Write("Informe CPF do titular: ");
+    conta.Titular.Cpf = Console.ReadLine();
+
+    
 }
