@@ -50,7 +50,11 @@
 			}
 			set
 			{
-				if (!(value < 0.0))
+				if (value < 0.0)
+				{
+					return;
+				}
+				else
 				{
 					saldo = value;
 				}
@@ -100,6 +104,7 @@
         {
             Numero_agencia = numero_agencia;
             Conta = conta;
+			Titular = new Cliente();
             TotalDeContasCriadas += 1;
         }
 
