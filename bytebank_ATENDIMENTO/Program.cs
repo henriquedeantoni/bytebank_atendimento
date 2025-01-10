@@ -1,5 +1,6 @@
 ﻿using bytebank.Modelos.Conta;
 using bytebank_ATENDIMENTO.bytebank.Util;
+using bytebank_ATENDIMENTO.byteBank.Exceptions;
 using System.Collections;
 
 Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
@@ -95,10 +96,12 @@ List<ContaCorrente> _listaDeContas = new List<ContaCorrente>()
 
 AtendimentoCliente();
 void AtendimentoCliente()
-{ 
-    char opcao = '0';
-    while(opcao != '6')
+{
+    try
     {
+        char opcao = '0';
+        while (opcao != '6')
+        {
         Console.Clear();
         Console.WriteLine("\t==================================================");
         Console.WriteLine("\t===                                            ===");
@@ -114,19 +117,32 @@ void AtendimentoCliente()
         Console.WriteLine("\t==================================================");
         Console.WriteLine("\n\n");
         Console.Write("\nDigite a opção desejada: ");
-        opcao = Console.ReadLine()[0];
+            try
+            {
+                opcao = Console.ReadLine()[0];
+            }
+            catch(Exception excecao)
+            {
+                throw new ByteBankException(excecao.Message);
+            }
 
-        switch (opcao)
-        {
-            case '1': CadastrarConta();
-                break;
-            case '2': ListarConta();
-                break;
-            default: Console.WriteLine("\n\tOpção não encontrada...");
-                break;
+            switch (opcao)
+            {
+                case '1': CadastrarConta();
+                    break;
+                case '2': ListarConta();
+                    break;
+                default: Console.WriteLine("\n\tOpção não encontrada...");
+                    break;
+            }
         }
-
     }
+    catch (ByteBankException excecao)
+    {
+        Console.WriteLine($"Erro: {excecao.Message}");
+    }
+
+
 }
 
 void ListarConta()
@@ -213,42 +229,47 @@ void CadastrarConta()
 //}
 
 
-List<ContaCorrente> _listaDeContas2 = new List<ContaCorrente>()
-{
-    new ContaCorrente(95, "926875-X"){Saldo = 15490},
-    new ContaCorrente(94, "926875-X"){Saldo = 2100},
-    new ContaCorrente(86, "926875-X"){Saldo = 734},
-};
+#region Exemplos uso List
+//List<ContaCorrente> _listaDeContas2 = new List<ContaCorrente>()
+//{
+//    new ContaCorrente(95, "926875-X"){Saldo = 15490},
+//    new ContaCorrente(94, "926875-X"){Saldo = 2100},
+//    new ContaCorrente(86, "926875-X"){Saldo = 734},
+//};
 
-List<ContaCorrente> _listaDeContas3 = new List<ContaCorrente>()
-{
-    new ContaCorrente(95, "926875-X"){Saldo = 15490},
-    new ContaCorrente(94, "926875-X"){Saldo = 2100},
-    new ContaCorrente(86, "926875-X"){Saldo = 734},
-};
+//List<ContaCorrente> _listaDeContas3 = new List<ContaCorrente>()
+//{
+//    new ContaCorrente(95, "926875-X"){Saldo = 15490},
+//    new ContaCorrente(94, "926875-X"){Saldo = 2100},
+//    new ContaCorrente(86, "926875-X"){Saldo = 734},
+//};
 
-Console.WriteLine(" --------------------------------------------- ");
+//Console.WriteLine(" --------------------------------------------- ");
 
-_listaDeContas2.AddRange(_listaDeContas3);
+//_listaDeContas2.AddRange(_listaDeContas3);
 
-for(int i = 0; i< _listaDeContas2.Count; i++)
-{
-    Console.WriteLine($" Indice[{i}] = Conta: {_listaDeContas2[i].Conta} e Agencia: {_listaDeContas2[i].Numero_agencia}");
-}
+//for(int i = 0; i< _listaDeContas2.Count; i++)
+//{
+//    Console.WriteLine($" Indice[{i}] = Conta: {_listaDeContas2[i].Conta} e Agencia: {_listaDeContas2[i].Numero_agencia}");
+//}
 
-Console.WriteLine(" --------------------------------------------- ");
+//Console.WriteLine(" --------------------------------------------- ");
 
-var range = _listaDeContas3.GetRange(0, 1);
-for(int i = 0; i<range.Count; i++)
-{
-    Console.WriteLine($" Indice[{i}] = Conta: {_listaDeContas2[i].Conta} e Agencia: {_listaDeContas2[i].Numero_agencia}");
-}
+//var range = _listaDeContas3.GetRange(0, 1);
+//for(int i = 0; i<range.Count; i++)
+//{
+//    Console.WriteLine($" Indice[{i}] = Conta: {_listaDeContas2[i].Conta} e Agencia: {_listaDeContas2[i].Numero_agencia}");
+//}
 
-Console.WriteLine(" --------------------------------------------- ");
+//Console.WriteLine(" --------------------------------------------- ");
 
-_listaDeContas2.Reverse();
+//_listaDeContas2.Reverse();
 
-for (int i = 0; i < _listaDeContas2.Count; i++)
-{
-    Console.WriteLine($" Indice[{i}] = Conta: {_listaDeContas2[i].Conta} e Agencia: {_listaDeContas2[i].Numero_agencia}");
-}
+//for (int i = 0; i < _listaDeContas2.Count; i++)
+//{
+//    Console.WriteLine($" Indice[{i}] = Conta: {_listaDeContas2[i].Conta} e Agencia: {_listaDeContas2[i].Numero_agencia}");
+//}
+#endregion
+
+
+
