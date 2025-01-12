@@ -89,9 +89,9 @@ TestaArrayDeContasCorrentes();
 
 List<ContaCorrente> _listaDeContas = new List<ContaCorrente>()
 {
-    new ContaCorrente(95, "926875-X"){Saldo = 15490},
-    new ContaCorrente(94, "926875-X"){Saldo = 2100},
-    new ContaCorrente(86, "926875-X"){Saldo = 734},
+    new ContaCorrente(95, "926875-X"){Saldo = 15490, Titular = new Cliente{Cpf="00214584535", Nome = "Felipe", Profissao = "Gerente"}},
+    new ContaCorrente(94, "347525-X"){Saldo = 18800, Titular = new Cliente{Cpf="02425436839", Nome = "Henrique", Profissao = "Desenvolvedor"} },
+    new ContaCorrente(86, "127632-X"){Saldo = 734 , Titular = new Cliente { Cpf = "07568245980", Nome = "Gustavo", Profissao = "Estagiario" } }
 };
 
 AtendimentoCliente();
@@ -132,6 +132,10 @@ void AtendimentoCliente()
                     break;
                 case '2': ListarConta();
                     break;
+                case '3': RemoverConta();
+                    break;
+                case '4': OrdenarConta();
+                    break;
                 default: Console.WriteLine("\n\tOpção não encontrada...");
                     break;
             }
@@ -140,9 +144,48 @@ void AtendimentoCliente()
     catch (ByteBankException excecao)
     {
         Console.WriteLine($"Erro: {excecao.Message}");
+        Console.ReadKey();
     }
 
 
+}
+
+void OrdenarConta()
+{
+    _listaDeContas.Sort();
+    Console.WriteLine("... Lista de contas ordenada ...");
+    Console.ReadKey();
+}
+
+void RemoverConta()
+{
+    Console.Clear();
+    Console.WriteLine("\t==================================================");
+    Console.WriteLine("\t===                                            ===");
+    Console.WriteLine("\t===              Remover Contas                ===");
+    Console.WriteLine("\t===                                            ===");
+    Console.WriteLine("\t==================================================");
+    Console.WriteLine("\n");
+    Console.WriteLine("Informe o número da conta");
+    string numeroConta = Console.ReadLine();
+    ContaCorrente conta = null;
+    foreach(var item in _listaDeContas)
+    {
+        if(item.Conta.Equals(numeroConta))
+        {
+            conta = item;
+        }
+    }
+    if(conta != null)
+    {
+        _listaDeContas.Remove(conta);
+        Console.WriteLine("... Conta removida da lista! ...");
+    }
+    else
+    {
+        Console.WriteLine("... Conta para remoção não encotrada ...");
+    }
+    Console.ReadKey();
 }
 
 void ListarConta()
